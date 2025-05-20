@@ -1,90 +1,88 @@
-# Telecom Customer Churn – End-to-End Data Engineering Project on Microsoft Fabric
+# Telecom Churn Data Engineering Pipeline with Microsoft Fabric
 
-This project demonstrates an end-to-end data engineering and analytics solution using the Medallion Architecture on Microsoft Fabric. The goal is to analyze telecom customer data, predict churn using machine learning, and enable downstream use cases across Power BI and Power Apps.
+---
 
-📁 Project Overview
-Domain: Telecom Customer Churn
+## Overview
 
-Source Dataset: Telecom Customer Churn Dataset - Kaggle
+This project demonstrates an end-to-end data engineering pipeline for customer churn analysis using the **Medallion Architecture** on **Microsoft Fabric**. Starting from raw telecom data sourced from Kaggle, the pipeline ingests, transforms, and models data through Bronze, Silver, and Gold layers. It also includes machine learning for churn prediction, semantic modeling for Power BI reporting, and a Power Apps-ready customer view for operational use.
 
-Platform: Microsoft Fabric
+Technologies used include Microsoft Fabric Lakehouse, Notebooks (PySpark), Dataflow Gen2, Power BI, and Power Apps.
 
-Architecture: Landing → Bronze → Silver → Gold → Semantic Model / Power Apps
+![Fabric_Telecom_Architecture](https://github.com/yourusername/telecom-fabric-data-engineering/assets/your-image-id)
 
-🏗 Architecture & Components
-1. Data Ingestion (Bronze Layer)
-Ingested the raw dataset from Kaggle into Fabric using Data Factory (Copy Data).
+---
 
-Stored in Lakehouse - Bronze folder.
+## Components
 
-2. Exploratory Data Analysis & Cleaning (Silver Layer)
-Used Notebooks to:
+### 1. Kaggle Telecom Dataset
 
-Handle missing values
+- **Source**: [Telecom Customer Churn Dataset](https://www.kaggle.com/datasets/blastchar/telco-customer-churn)
+- **Purpose**: Contains customer attributes such as contract type, tenure, and churn status.
 
-Engineer features (e.g., AgeGroup, RevenueTier)
+---
 
-Normalize churn labels
+### 2. Data Ingestion (Bronze Layer)
 
-Output stored in Lakehouse - Silver.
+- **Tool**: Data Factory (Copy Activity in Fabric)  
+- **Purpose**: Load raw CSV data into Lakehouse as the Bronze layer.
 
-3. Machine Learning - Churn Prediction
-Built a churn classification model using PySpark (Notebook).
+---
 
-Features used: ContractType, Tenure, MonthlyCharges, etc.
+### 3. Data Cleaning & Feature Engineering (Silver Layer)
 
-Trained, evaluated, and logged churn predictions for further use.
+- **Tool**: Microsoft Fabric Notebook (PySpark)  
+- **Purpose**:
+  - Handle missing values  
+  - Standardize and clean features  
+  - Create derived columns (e.g., AgeGroup, HighRevenueCustomer)
 
-4. Gold Layer Creation
-Used Notebooks to summarize Silver data into subject-oriented Gold tables:
+---
 
-gold_churn_summary
+### 4. Machine Learning (Churn Prediction)
 
-gold_revenue_by_segment
+- **Tool**: Microsoft Fabric Notebook  
+- **Purpose**:
+  - Train a churn classification model  
+  - Predict churn labels  
+  - Prepare ML results for reporting and analysis
 
-gold_customer_profiles
+---
 
-5. Data Marts
-Created dedicated Gold Data Marts using Notebooks:
+### 5. Gold Layer Creation
 
-mart_marketing: for targeted campaigns
+- **Tool**: Microsoft Fabric Notebook  
+- **Purpose**:
+  - Aggregate churn and revenue metrics  
+  - Create customer segmentation profiles  
+  - Prepare data marts for specific teams
 
-mart_support_ops: for retention and service analysis
+---
 
-6. Semantic Model with Dataflow Gen2
-Built a Dataflow Gen2 to connect Gold tables into a unified Semantic Model.
+### 6. Department-Specific Data Marts
 
-Used this model in Power BI for:
+- **Tool**: Fabric Notebooks  
+- **Marketing Mart**: Customer segmentation for targeted campaigns  
+- **Support Ops Mart**: Focus on high-risk churn customers
 
-Churn Rate KPIs
+---
 
-Revenue Segmentation
+### 7. Semantic Model with Dataflow Gen2
 
-Retention Trend Reports
+- **Tool**: Dataflow Gen2  
+- **Purpose**: Create a unified semantic model from Gold tables for Power BI  
+- **Usage**: Power BI dashboards and reports for churn, revenue, and retention trends
 
-7. Power Apps Use Case
-Gold customer view (gold_customer_profiles) exposed to Power Apps via Dataverse for building support and marketing interfaces.
+---
 
-🧰 Tools Used
-Tool	Purpose
-Fabric Data Factory	Ingestion (Copy Data to Lakehouse)
-Notebooks (PySpark)	EDA, cleaning, ML modeling, Gold creation
-Dataflow Gen2	Semantic model creation
-Power BI	Interactive reporting
-Power Apps	Custom support/marketing app
+### 8. Power Apps Integration
 
-📊 Key Features
-End-to-end Medallion implementation on Microsoft Fabric
+- **Tool**: Dataverse (via Lakehouse to Power Apps)  
+- **Purpose**: Surface `gold_customer_profiles` data for support/marketing app interfaces
 
-Applied machine learning for churn classification
+---
 
-Central semantic model powering multiple Power BI reports
+## How to Run
 
-Integrated Power Apps scenario for operations teams
-
-🚀 Future Enhancements
-Implement real-time scoring for churn prediction
-
-Add pipeline orchestration & monitoring
-
-Extend data model to include usage & billing data
+1. **Ingest Kaggle dataset to Lakehouse** using Copy Activity  
+2. **Run Silver layer Notebook** for cleaning and feature creation  
+3. **Train churn model** and generate predictions in
