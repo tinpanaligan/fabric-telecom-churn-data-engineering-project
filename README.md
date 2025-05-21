@@ -8,7 +8,7 @@ This project demonstrates an end-to-end data engineering pipeline for customer c
 
 Technologies used include Microsoft Fabric Lakehouse, Notebooks (PySpark), Dataflow Gen2, Power BI, and Power Apps.
 
-![Fabric_Telecom_Architecture](https://github.com/yourusername/telecom-fabric-data-engineering/assets/your-image-id)
+![Fabric_Telecom_Architecture](Telecom Project Data Architecture (1).png)
 
 ---
 
